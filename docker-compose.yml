@@ -1,0 +1,36 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./opencart:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - PHP_DISPLAY_ERRORS=1
+    command: >
+      bash -c "chown -R www-data:www-data /var/www/html &&
+               chmod -R 755 /var/www/html &&
+               chmod -R 777 /var/www/html/system/storage &&
+               chmod -R 777 /var/www/html/image &&
+               apache2-foreground"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: opencart
+      MYSQL_USER: opencart
+      MYSQL_PASSWORD: opencart
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uopencart", "-popencart"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  db_data: {}
