@@ -1,27 +1,49 @@
 system/storage/cache/*
+!system/storage/cache/**/
+
 system/storage/logs/*
+!system/storage/logs/**/
+
 system/storage/download/*
+!system/storage/download/**/
+
 system/storage/upload/*
+!system/storage/upload/**/
+
 system/storage/modification/*
-system/cache/*
-system/logs/*
-system/upload/*
-system/download/*
+!system/storage/modification/**/
 
 system/storage/session/*
+!system/storage/session/**/
+
+system/cache/*
+!system/cache/**/
+
+system/logs/*
+!system/logs/**/
+
+system/upload/*
+!system/upload/**/
+
+system/download/*
+!system/download/**/
+
 *.tmp
 *.bak
 *.swp
 *~
-
 *.sql
 *.sql.gz
 *.bak
 
-# Ігнорування завантажених файлів користувачів
 image/cache/*
+!image/cache/**/
+
 image/data/*
+!image/data/**/
+
 download/*
+!download/**/
 
 .idea/
 .vscode/
